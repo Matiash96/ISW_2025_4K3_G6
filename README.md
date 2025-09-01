@@ -33,17 +33,17 @@ Repositorio de Ingeniería y calidad de software
 # Listado de ítems de configuración
 | Nombre del ítem         | Tipo    | Regla Nombrado               | Ubicación Física                               |
 | ----------------------- | ------- | ---------------------------- | ---------------------------------------------- |
-| Bibliografía            | Recurso | `NombreLibro.EXT`            | `Bibliografia/UnidadX`                         |
+| Bibliografía            | Recurso | `NombreLibro.[EXT]`          | `Bibliografia/UnidadX`                         |
 | Clases Grabadas (link)  | Recurso | `Clase_Nro_Fecha_Link`       | `Clases Grabadas/` (archivo con links)         |
-| Presentaciones de Clase | Recurso | `Tema_Clase_M.EXT`           | `Presentaciones de Clase PPT/`                 |
-| Entregas (TP)           | Trabajo | `TPN.EXT`                    | `Entregas/TPN/`                                |
-| Notas de Clase          | Recurso | `Tema_YYYYMMDD_Apellido.EXT` | `Material de estudio/Notas de Clase/`          | 
-| Resumenes               | Recurso | `Resumen_UnidadX.EXT`        | `Material de estudio/Resumenes`                |
+| Presentaciones de Clase | Recurso | `Tema_Clase_M.[EXT]`         | `Presentaciones de Clase PPT/`                 |
+| Entregas (TP)           | Trabajo | `TPN.[EXT]`                  | `Entregas/TPN/`                                |
+| Notas de Clase          | Recurso | `Tema_YYYYMMDD_Apellido.[EXT]`| `Material de estudio/Notas de Clase/`          | 
+| Resumenes               | Recurso | `Resumen_UnidadX.[EXT]`      | `Material de estudio/Resumenes`                |
 | Estructura repositorio  | Trabajo | `Estructura_Repositorio.md`  | `Plan de SCM/`                                 |
 | Reglas de Nombrado      | Trabajo | `Reglas_Nombrado.md`         | `Plan de SCM/`                                 |
 | Referencias             | Recurso | `Referencias.md`             | `Plan de SCM/`                                 |
-| Cronograma              | Trabajo | `Cronograma_Fecha.ext`       | `/`                                            |
-| Ejercicios Practicos    | Trabajo | `NombreEjejrcicio.EXT`       |`Integrantes/NombreApellido/EjercicosPracticos` |
+| Cronograma              | Trabajo | `Cronograma_Fecha.[EXT]`     | `/`                                            |
+| Ejercicios Practicos    | Trabajo | `NombreEjejrcicio.[EXT]`     |`Integrantes/NombreApellido/EjercicosPracticos` |
 
 
 
