@@ -6,7 +6,7 @@ Repositorio de Ingeniería y calidad de software
 **ISW_2025_3K4_G6**
 * **Bibliiografía**
     * UnidadX
-* **Presentaciones de Clase PPt**
+* **Presentaciones de Clase PPT**
 * **Entregas**
   * TPN
 * **Material de estudio**
