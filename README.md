@@ -36,7 +36,7 @@ Repositorio de Ingeniería y Calidad de Software
 # Listado de ítems de configuración
 | Nombre del ítem                    | Tipo    | Regla Nombrado                   | Ubicación Física                                          |
 | ---------------------------------- | ------- | -------------------------------- | --------------------------------------------------------- |
-| Bibliografía                       | Recurso | `[Título-del-libro]_[Nombre-autor].pdf `              | `/Bibliografía/TemaX`                                     |
+| Bibliografía                       | Recurso | `[Título-del-libro]_[Nombre-autor].pdf `              | `/Bibliografía/Tema/`                                     |
 | Presentaciones de Clase            | Recurso | `[M]_[Tema].pdf`                 | `/Presentaciones de Clase/`                               |
 | Trabajos Prácticos Grupales        | Trabajo | `TP[N]_[Tema].[EXT]`             | `/Trabajos Prácticos/Trabajos Prácticos Grupales/`        |
 | Trabajos de Investigación Grupales | Trabajo | `TP[N]_[Tema].[EXT]`             | `/Trabajos Prácticos/Trabajos de Investigación Grupales/` | 
