@@ -45,7 +45,7 @@ Repositorio de Ingeniería y Calidad de Software
 | Ejercicios Prácticos               | Trabajo | `[Tema]_Caso[I]\_[Apellido].pdf` | `/Material de estudio/Ejercicios prácticos resueltos/`    |
 | Guía de Ejercicios Prácticos       | Trabajo | `Guía_Ejercicios_Prácticos.pdf`  | `/Material de estudio/Ejercicios prácticos resueltos/`    |
 | Notas de Clase                     | Recurso | `[Tema]_[Fecha]\_[Apellido].pdf` | `/Material de estudio/Notas de Clase/`                    |
-| Resúmenes                          | Recurso | `Resumen_Parcial_[J].pdf`        | `/Material de estudio/Resúmenes/`                         |
+| Resúmenes                          | Recurso | `Resumen_Parcial_[Autor]_[J].pdf`        | `/Material de estudio/Resúmenes/`                         |
 | Clases Grabadas                    | Recurso | `Link_Clases_Grabadas.txt`       | `/`                                                       |
 | Cronograma                         | Recurso | `Cronograma_2025_2doCuatri.txt`  | `/`                                                       |
 | Plan SCM                           | Recurso | `Plan_SCM.md`                    | `/`                                                       |
