@@ -96,3 +96,41 @@ Tips para saber donde parar
 - Chequear si vale la pena probar negativos, etc.
 
 Clase que viene traer leido el ejercicio de ecomomy park conel listado de user stories hecho
+
+## Ejercicio: EcoHarmony Park
+
+## Definición de roles
+
+- Visitante del parque (**_VP_**)
+- Administrador del parque (**_AP_**)
+
+### Lista de User Stories
+
+#### Horarios de atencion (HA)
+
+- Como _VP_ quiero consultar los horarios de alimentacion de los animales, incluyendo la especie, nombre del animal, edad, hora programada, sector del parque y cuiador encargado para para ver a los animales alimentarse.
+- Como _VP_ quiero seleccionar la fecha en la que voy a estar en el parque para ver los horarios de esa fecha.
+- Como _VP_ quiero poder ver un aviso de proximo horario de alimentacion para ver a los animales alimentarse.
+- Como _VP_ quiero registrar notificaciones de recordatorios de los horarios de alimentacion para seguir de cerca los HA que me interesan.
+- Como _AP_ quiero registrar los sectores del parque para que puedan ser visualizados los horarios de atencion disponibles. ?? (Este esta mal creo)
+
+#### Consulta de mapa interactivo
+
+- Como _VP_ quiero consultar los shows especiales de un dia determinado, viendo el nombre del show y su horario para poder asistir al show que me interesa.
+- Como _VP_ quiero ver mi ubicacion en tiempo real dentro del mapa interactivo para ubicarme geograficamente dentro del parque.
+
+#### Gestion de entradas
+
+- Como _VP_ quiero registrarme en la aplicacion para consultar informacion acerca de mi visita al parque.
+- Como _VP_ quiero registrar la compra de una entrada ingresando las fecha de visita, la cantidad total de entradas requeridas y la edad de cada visitante para visitar el parque.
+- Como _VP_ quiero registrar el pago de la compra de una entrada para visitar el parque.
+- Como _VP_ quiero seleccionar la opcion de pago de la compra de una entrada en efectivo para pagar en la boleteria.
+- Como _VP_ quiero seleccionar la opcion de pago de la compra de una entrada con tarjeta para pagar via Mercado Pago.
+- Como _VP_ quiero poder confirmar via mail las entradas pagadas para poder ingresar en el parque.
+
+#### Gestion de Actividades
+
+- Como _AP_ quiero registrar las actividades que se realizan en al parque para que los VP visiten el parque.
+- Como _VP_ quiero registrar la inscripcion a una actividad para ver mi actividad deseada en el parque.
+- Como _VP_ quiero registrar mi nombre, DNI, edad y talla de vestimenta en caso de ser demandado por la actividad para registrar la inscripcion a una actividad deseada.
+- Como _VP_ quiero aceptar los terminos t condiciones de la actividad en la que participo para poder registrar mi asistencia esta ultima.
