@@ -34,21 +34,22 @@ Repositorio de Ingeniería y Calidad de Software
   * Resúmenes
 
 # Listado de ítems de configuración
-| Nombre del ítem                    | Tipo    | Regla Nombrado                   | Ubicación Física                                          |
-| ---------------------------------- | ------- | -------------------------------- | --------------------------------------------------------- |
-| Bibliografía                       | Recurso | `[Título-del-libro]_[Nombre-autor].pdf `              | `/Bibliografía/Tema/`                                     |
-| Presentaciones de Clase            | Recurso | `[M]_[Tema].pdf`                 | `/Presentaciones de Clase/`                               |
-| Trabajos Prácticos Grupales        | Trabajo | `TP[N]_[Tema].[EXT]`             | `/Trabajos Prácticos/Trabajos Prácticos Grupales/`        |
-| Trabajos de Investigación Grupales | Trabajo | `TP[N]_[Tema].[EXT]`             | `/Trabajos Prácticos/Trabajos de Investigación Grupales/` | 
-| Guía de TPE                        | Trabajo | `Guía_de_TPE.pdf`                | `/Trabajos Prácticos/Trabajos Prácticos Grupales/`        |
-| Lineamientos para TIG              | Trabajo | `Lineamientos_para_TIG.pdf`      | `/Trabajos Prácticos/Trabajos de Investigación Grupales/` |
-| Ejercicios Prácticos               | Trabajo | `[Tema]_Caso[I]\_[Apellido].pdf` | `/Material de estudio/Ejercicios prácticos resueltos/`    |
-| Guía de Ejercicios Prácticos       | Trabajo | `Guía_Ejercicios_Prácticos.pdf`  | `/Material de estudio/Ejercicios prácticos resueltos/`    |
-| Notas de Clase                     | Recurso | `[Tema]_[Fecha]\_[Apellido].pdf` | `/Material de estudio/Notas de Clase/`                    |
+| Nombre del ítem                    | Tipo    | Regla Nombrado                           | Ubicación Física                                          |
+| ---------------------------------- | ------- | ---------------------------------------- | --------------------------------------------------------- |
+| Bibliografía                       | Recurso | `[Título-del-libro]_[Nombre-autor].pdf ` | `/Bibliografía/Tema/`                                     |
+| Presentaciones de Clase            | Recurso | `[M]_[Tema].pdf`                         | `/Presentaciones de Clase/`                               |
+| Trabajos Prácticos Grupales        | Trabajo | `TP[N]_[Tema].[EXT]`                     | `/Trabajos Prácticos/Trabajos Prácticos Grupales/`        |
+| Trabajos de Investigación Grupales | Trabajo | `TP[N]_[Tema].[EXT]`                     | `/Trabajos Prácticos/Trabajos de Investigación Grupales/` | 
+| Guía de TPE                        | Trabajo | `Guía_de_TPE.pdf`                        | `/Trabajos Prácticos/Trabajos Prácticos Grupales/`        |
+| Lineamientos para TIG              | Trabajo | `Lineamientos_para_TIG.pdf`              | `/Trabajos Prácticos/Trabajos de Investigación Grupales/` |
+| Ejercicios Prácticos               | Trabajo | `[Tema]_Caso[I]\_[Apellido].pdf`         | `/Material de estudio/Ejercicios prácticos resueltos/`    |
+| Guía de Ejercicios Prácticos       | Trabajo | `Guía_Ejercicios_Prácticos.pdf`          | `/Material de estudio/Ejercicios prácticos resueltos/`    |
+| Notas de Clase                     | Recurso | `[Tema]_[Fecha]\_[Apellido].pdf`         | `/Material de estudio/Notas de Clase/`                    |
 | Resúmenes                          | Recurso | `Resumen_Parcial_[Autor]_[J].pdf`        | `/Material de estudio/Resúmenes/`                         |
-| Clases Grabadas                    | Recurso | `Link_Clases_Grabadas.txt`       | `/`                                                       |
-| Cronograma                         | Recurso | `Cronograma_2025_2doCuatri.txt`  | `/`                                                       |
-| Plan SCM                           | Recurso | `Plan_SCM.md`                    | `/`                                                       |
+| Clases Grabadas                    | Recurso | `Link_Clases_Grabadas.txt`               | `/Material de estudio/`                                   |
+| Cronograma                         | Recurso | `Cronograma_2025_2doCuatri.txt`          | `/`                                                       |
+| Plan SCM                           | Recurso | `Plan_SCM.md`                            | `/`                                                       |
+| Modalidad Académica                | Recurso | `MC_<AÑO>.pdf`                           | `/`                                                       |
 
 # Referencia
 | Sigla    | Significado                                           |
@@ -61,6 +62,7 @@ Repositorio de Ingeniería y Calidad de Software
 | Apellido | Apellido del propietario del archivo.                 |
 | Fecha    | Fecha de la clase.                                    |
 | J        | Número de Parcial.                                    |
+| AÑO	     | Año de la modalidad académica.                        |
 
 
 # Criterio línea base
