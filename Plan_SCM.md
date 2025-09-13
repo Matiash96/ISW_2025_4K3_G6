@@ -49,7 +49,7 @@ Repositorio de Ingeniería y Calidad de Software
 | Clases Grabadas                    | Recurso | `Link_Clases_Grabadas.txt`               | `/Material de estudio/`                                   |
 | Cronograma                         | Recurso | `Cronograma_2025_2doCuatri.txt`          | `/`                                                       |
 | Plan SCM                           | Recurso | `Plan_SCM.md`                            | `/`                                                       |
-| Modalidad Académica                | Recurso | `MC_<AÑO>.pdf`                           | `/`                                                       |
+| Modalidad Académica                | Recurso | `MA_[AÑO].pdf`                           | `/`                                                       |
 
 # Referencia
 | Sigla    | Significado                                           |
