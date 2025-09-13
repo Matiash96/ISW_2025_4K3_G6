@@ -19,11 +19,7 @@ Repositorio de Ingeniería y Calidad de Software
 
 **ISW_2025_4K3_G6**
 * **Bibliografía**
-    * Ingeniería de Software
-    * Testing de Software
-    * Pensamiento Ágil
-    * SCM
-    * Lean y Kanban
+    * Carpeta por tema (por ejemplo: Ingeniería de Software, Testing de Software, Pensamiento Ágil, SCM, Lean y Kanban…)
 * **Presentaciones de Clase**
 * **Trabajos Prácticos**
   * Trabajos Prácticos Grupales
