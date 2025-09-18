@@ -19,7 +19,7 @@ Repositorio de Ingeniería y Calidad de Software
 
 **ISW_2025_4K3_G6**
 * **Bibliografía**
-    * Carpeta por tema (por ejemplo: Ingeniería de Software, Testing de Software, Pensamiento Ágil, SCM, Lean y Kanban…)
+    * [Tema]
 * **Presentaciones de Clase**
 * **Trabajos Prácticos**
   * Trabajos Prácticos Grupales
@@ -40,7 +40,7 @@ Repositorio de Ingeniería y Calidad de Software
 | Lineamientos para TIG              | Trabajo | `Lineamientos_para_TIG.pdf`              | `/Trabajos Prácticos/Trabajos de Investigación Grupales/` |
 | Ejercicios Prácticos               | Trabajo | `[Tema]_Caso[I]\_[Apellido].pdf`         | `/Material de estudio/Ejercicios prácticos resueltos/`    |
 | Guía de Ejercicios Prácticos       | Trabajo | `Guía_Ejercicios_Prácticos.pdf`          | `/Material de estudio/Ejercicios prácticos resueltos/`    |
-| Notas de Clase                     | Recurso | `[Tema]_[Fecha]\_[Apellido].pdf`         | `/Material de estudio/Notas de Clase/`                    |
+| Notas de Clase                     | Recurso | `[Tema]_[Fecha]\_[Apellido].[EXT]`         | `/Material de estudio/Notas de Clase/`                    |
 | Resúmenes                          | Recurso | `Resumen_Parcial_[Autor]_[J].pdf`        | `/Material de estudio/Resúmenes/`                         |
 | Clases Grabadas                    | Recurso | `Link_Clases_Grabadas.txt`               | `/Material de estudio/`                                   |
 | Cronograma                         | Recurso | `Cronograma_2025_2doCuatri.txt`          | `/`                                                       |
