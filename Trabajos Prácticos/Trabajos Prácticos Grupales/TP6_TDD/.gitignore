@@ -1,0 +1,22 @@
+# Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Eclipse/STS (si no usás Eclipse, podés borrar esta sección)
+.classpath
+.project
+.settings/
+
+# NetBeans (si no usás NetBeans, podés borrar esta sección)
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
