@@ -1,0 +1,4 @@
+package ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions;
+
+public class HorarioNoDisponibleException extends RuntimeException{
+}
