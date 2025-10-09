@@ -39,12 +39,12 @@ public class InscripcionServiceTest {
     private TallaRepository tallaRepository;
 
     @Test
-    public void testInscribirseCumpliendoLoNecesario() {
+    public void testInscribirseConCupoHorarioDatosVisitanteTyCValidos() {
 
         // Fabricamos la inscripción que va a recibir por parámetro el service
         final Long actividadProgramadaId = 3L;
-        VisitanteDTO visitanteDTO1 = new VisitanteDTO("Johnny Lojuno", 44444444, LocalDate.of(2002, 1, 1), 1L); // Asumo que el DTO usa Long para DNI y ID de Talla
-        VisitanteDTO visitanteDTO2 = new VisitanteDTO("Johnny Loconozco", 44444443, LocalDate.of(2002, 1, 1), 1L);
+        VisitanteDTO visitanteDTO1 = new VisitanteDTO("Johnny Lojuno", 44444444, 21, 1L); // Asumo que el DTO usa Long para DNI y ID de Talla
+        VisitanteDTO visitanteDTO2 = new VisitanteDTO("Johnny Loconozco", 44444443, 22, 1L);
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO1, visitanteDTO2);
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
                 LocalDateTime.of(2025, 10, 7, 20, 30, 15),
@@ -59,8 +59,8 @@ public class InscripcionServiceTest {
         ActividadProgramada actividadProgramadaEncontrada = new ActividadProgramada(
                 actividadProgramadaId, LocalDateTime.of(2025, 10, 8, 10, 30), LocalDateTime.of(2025, 10, 8, 11, 30), 30, actividadBase
         );
-        Visitante visitanteGuardado1 = new Visitante("Johnny Lojuno", 44444444, LocalDate.of(2002, 1, 1), tallaEntidad);
-        Visitante visitanteGuardado2 = new Visitante("Johnny Loconozco", 44444443, LocalDate.of(2002, 1, 1), tallaEntidad);
+        Visitante visitanteGuardado1 = new Visitante("Johnny Lojuno", 44444444, 21, tallaEntidad);
+        Visitante visitanteGuardado2 = new Visitante("Johnny Loconozco", 44444443, 22, tallaEntidad);
 
         // Esta es la inscripción final que se espera que se fabrique
         final Long inscripcionFinalId = 100L;
@@ -118,7 +118,7 @@ public class InscripcionServiceTest {
     public void testInscribirseActividadSinCupo() {
         final Long actividadProgramadaId = 3L;
 
-        VisitanteDTO visitanteDTO1 = new VisitanteDTO("Esteban Quito", 11223344, LocalDate.of(2000, 1, 1), 1L);
+        VisitanteDTO visitanteDTO1 = new VisitanteDTO("Esteban Quito", 11223344, 21, 1L);
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO1);
 
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
@@ -159,7 +159,7 @@ public class InscripcionServiceTest {
         Actividad actividadBase = new Actividad(5L, "Safari", false, "Recorrido a pie.");
 
         // 2. Visitante DTO
-        VisitanteDTO visitanteDTO = new VisitanteDTO("Juan Perez", 55555555, LocalDate.of(1995, 5, 5), null);
+        VisitanteDTO visitanteDTO = new VisitanteDTO("Juan Perez", 55555555, 21, null);
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO);
 
         // 3. Inscripcion DTO
@@ -181,7 +181,7 @@ public class InscripcionServiceTest {
         );
 
         // 5. Visitante guardado
-        Visitante visitanteGuardado = new Visitante("Juan Perez", 55555555, LocalDate.of(1995, 5, 5), null); // Talla queda en null
+        Visitante visitanteGuardado = new Visitante("Juan Perez", 55555555, 21, null); // Talla queda en null
 
         // 6. Inscripción final guardada
         final Long inscripcionFinalId = 200L;
@@ -228,7 +228,7 @@ public class InscripcionServiceTest {
         final LocalDateTime horaInscripcionTemprana = LocalDateTime.of(2025, 10, 8, 19, 0, 0);
 
         // 2. Visitante DTO
-        VisitanteDTO visitanteDTO = new VisitanteDTO("Ana Temporal", 66666666, LocalDate.of(1990, 1, 1), 1L);
+        VisitanteDTO visitanteDTO = new VisitanteDTO("Ana Temporal", 66666666, 21, 1L);
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO);
 
         // 3. Inscripcion DTO: Hora que debe fallar
@@ -267,11 +267,11 @@ public class InscripcionServiceTest {
     }
 
     @Test
-    public void testInscribirseSinAceptarTYC() {
+    public void testInscribirseSinAceptarTerminosYCondiciones() {
         final Long actividadProgramadaId = 44L;
 
         // 1. Visitante DTO
-        VisitanteDTO visitanteDTO = new VisitanteDTO("Juana Pereza", 77777777, LocalDate.of(1985, 1, 1), 1L);
+        VisitanteDTO visitanteDTO = new VisitanteDTO("Juana Pereza", 77777777, 21, 1L);
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO);
 
         // 2. Inscripcion DTO
@@ -307,7 +307,7 @@ public class InscripcionServiceTest {
         final Long actividadProgramadaId = 55L; // Nuevo ID
 
         // 1. Visitante DTO: ID de Talla es NULL (Simula la falta del dato)
-        VisitanteDTO visitanteDTO = new VisitanteDTO("Dani Vestimenta", 88888888, LocalDate.of(1998, 1, 1), null); // La talla es null
+        VisitanteDTO visitanteDTO = new VisitanteDTO("Dani Vestimenta", 88888888, 21, null); // La talla es null
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO);
 
         // 2. Inscripcion DTO

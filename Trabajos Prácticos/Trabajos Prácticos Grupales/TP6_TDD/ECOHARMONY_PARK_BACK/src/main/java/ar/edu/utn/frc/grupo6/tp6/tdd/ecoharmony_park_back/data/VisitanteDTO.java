@@ -12,6 +12,6 @@ import java.time.LocalDate;
 public class VisitanteDTO {
     private String nombre;
     private Integer dni;
-    private LocalDate fechaNacimiento;
+    private Integer edad;
     private Long idTallaVestimenta;
 }

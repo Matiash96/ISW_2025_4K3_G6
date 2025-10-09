@@ -17,6 +17,6 @@ public class Visitante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer dni;
-    private LocalDate fechaNacimiento;
+    private Integer edad;
     private Talla tallaVestimenta;
 }

@@ -71,7 +71,7 @@ public class InscripcionService {
         for (VisitanteDTO visitanteDTO : inscripcionDTO.getParticipantes()) {
             // Validar datos básicos del visitante
             if (visitanteDTO.getNombre() == null || visitanteDTO.getNombre().trim().isEmpty() ||
-                visitanteDTO.getDni() == null || visitanteDTO.getFechaNacimiento() == null) {
+                visitanteDTO.getDni() == null || visitanteDTO.getEdad() == null) {
                 throw new DatosIncompletosException();
             }
 
@@ -90,7 +90,7 @@ public class InscripcionService {
             Visitante visitante = new Visitante(
                     visitanteDTO.getNombre(),
                     visitanteDTO.getDni(),
-                    visitanteDTO.getFechaNacimiento(),
+                    visitanteDTO.getEdad(),
                     talla
             );
 
