@@ -311,7 +311,8 @@ public class InscripcionServiceTest {
     }
 
     @Test
-    public void testInscribirseActividadTalleRequeridoNoIngresado() {final Long actividadProgramadaId = 55L; // Nuevo ID
+    public void testInscribirseActividadTalleRequeridoNoIngresado() {
+        final Long actividadProgramadaId = 55L; // Nuevo ID
 
         // 1. Visitante DTO: ID de Talla es NULL (Simula la falta del dato)
         VisitanteDTO visitanteDTO = new VisitanteDTO("Dani Vestimenta", 88888888, LocalDate.of(1998, 1, 1), null); // La talla es null
