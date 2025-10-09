@@ -2,21 +2,16 @@ package ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.services;
 
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.data.InscripcionDTO;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.data.VisitanteDTO;
-import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.CupoInsuficienteException;
-import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.DatosIncompletosException;
-import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.HorarioNoDisponibleException;
-import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.TerminosNoAceptadosException;
+import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.*;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.models.*;
-import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.ActividadProgramadaRepository;
-import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.InscripcionRepository;
-import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.VisitanteRepository;
+import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest; // por el momento no lo vamos a usar hasta diseñar la BDD
+import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,8 +20,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 @ExtendWith(MockitoExtension.class)
+@TestPropertySource(locations = "classpath:application.properties")
 public class InscripcionServiceTest {
     @InjectMocks
     private InscripcionService inscripcionService;
@@ -40,13 +35,16 @@ public class InscripcionServiceTest {
     @Mock
     private ActividadProgramadaRepository actividadProgramadaRepository;
 
+    @Mock
+    private TallaRepository tallaRepository;
+
     @Test
     public void testInscribirseCumpliendoLoNecesario() {
 
         // Fabricamos la inscripción que va a recibir por parámetro el service
         final Long actividadProgramadaId = 3L;
-        VisitanteDTO visitanteDTO1 = new VisitanteDTO("Johnny Lojuno", 44444444, LocalDate.of(2002, 01, 01), 1L); // Asumo que el DTO usa Long para DNI y ID de Talla
-        VisitanteDTO visitanteDTO2 = new VisitanteDTO("Johnny Loconozco", 44444443, LocalDate.of(2002, 01, 01), 1L);
+        VisitanteDTO visitanteDTO1 = new VisitanteDTO("Johnny Lojuno", 44444444, LocalDate.of(2002, 1, 1), 1L); // Asumo que el DTO usa Long para DNI y ID de Talla
+        VisitanteDTO visitanteDTO2 = new VisitanteDTO("Johnny Loconozco", 44444443, LocalDate.of(2002, 1, 1), 1L);
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO1, visitanteDTO2);
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
                 LocalDateTime.of(2025, 10, 7, 20, 30, 15),
@@ -56,13 +54,13 @@ public class InscripcionServiceTest {
         );
 
         // Fabricamos las entidades con las que luego vamos a contrastar si se hizo bien
-        Actividad actividadBase = new Actividad(2L, "Tirolesa", true, "Los menores...");
+        Actividad actividadBase = new Actividad(2L, "Tirolesa", true, "Los menores de 18 deben ir acompañados por un adulto.");
         Talla tallaEntidad = new Talla(1L, "L");
         ActividadProgramada actividadProgramadaEncontrada = new ActividadProgramada(
                 actividadProgramadaId, LocalDateTime.of(2025, 10, 8, 10, 30), LocalDateTime.of(2025, 10, 8, 11, 30), 30, actividadBase
         );
-        Visitante visitanteGuardado1 = new Visitante("Johnny Lojuno", 44444444, LocalDate.of(2002, 01, 01), tallaEntidad);
-        Visitante visitanteGuardado2 = new Visitante("Johnny Loconozco", 44444443, LocalDate.of(2002, 01, 01), tallaEntidad);
+        Visitante visitanteGuardado1 = new Visitante("Johnny Lojuno", 44444444, LocalDate.of(2002, 1, 1), tallaEntidad);
+        Visitante visitanteGuardado2 = new Visitante("Johnny Loconozco", 44444443, LocalDate.of(2002, 1, 1), tallaEntidad);
 
         // Esta es la inscripción final que se espera que se fabrique
         final Long inscripcionFinalId = 100L;
@@ -87,6 +85,9 @@ public class InscripcionServiceTest {
         // 3er Mock: Cuando el InscripcionService vaya a guardar la inscripción en la bdd.
         Mockito.when(inscripcionRepository.save(Mockito.any(Inscripcion.class)))
                 .thenReturn(inscripcionGuardada);
+
+        Mockito.when(tallaRepository.findById(1L))
+                .thenReturn(Optional.of(tallaEntidad));
 
         // Ahora llamamos al service y le pedimos hacer la inscripción.
         Inscripcion resultado = inscripcionService.inscribirVisitantes(inscripcionDTO);
@@ -141,9 +142,7 @@ public class InscripcionServiceTest {
                 .thenReturn(Optional.of(actividadProgramadaSinCupo));
 
         // 2do Mock: El Service DEBE lanzar CupoInsuficienteException
-        assertThrows(CupoInsuficienteException.class, () -> {
-            inscripcionService.inscribirVisitantes(inscripcionDTO);
-        }, "Debe fallar porque el cupo es cero.");
+        assertThrows(CupoInsuficienteException.class, () -> inscripcionService.inscribirVisitantes(inscripcionDTO), "Debe fallar porque el cupo es cero.");
 
         // 3er Mock: Confirmamos que la validación ocurrió ANTES de guardar.
         // El Service NO DEBIÓ intentar guardar ni visitantes ni la inscripción final.
@@ -226,7 +225,7 @@ public class InscripcionServiceTest {
         final Long actividadProgramadaId = 33L;
 
         // 1. Horario de Inscripción FUERA DE RANGO: 9:00 AM (la actividad es de 10:30 a 11:30)
-        final LocalDateTime horaInscripcionTemprana = LocalDateTime.of(2025, 10, 8, 9, 0, 0);
+        final LocalDateTime horaInscripcionTemprana = LocalDateTime.of(2025, 10, 8, 19, 0, 0);
 
         // 2. Visitante DTO
         VisitanteDTO visitanteDTO = new VisitanteDTO("Ana Temporal", 66666666, LocalDate.of(1990, 1, 1), 1L);
@@ -259,9 +258,7 @@ public class InscripcionServiceTest {
                 .thenReturn(Optional.of(actividadProgramadaEncontrada));
 
         // 6. El Service DEBE lanzar HorarioNoDisponibleException
-        assertThrows(HorarioNoDisponibleException.class, () -> {
-            inscripcionService.inscribirVisitantes(inscripcionDTO);
-        }, "Debe fallar porque la hora de inscripción está fuera del horario programado de la actividad.");
+        assertThrows(HorarioNoDisponibleException.class, () -> inscripcionService.inscribirVisitantes(inscripcionDTO), "Debe fallar porque la hora de inscripción está fuera del horario programado de la actividad.");
 
 
         // 7. Confirmamos que la validación ocurrió ANTES de guardar.
@@ -296,14 +293,9 @@ public class InscripcionServiceTest {
                 actividadBase
         );
 
-        // Configurar el mock de búsqueda de actividad para que NO falle por sí mismo
-        Mockito.when(actividadProgramadaRepository.findById(actividadProgramadaId))
-                .thenReturn(Optional.of(actividadProgramadaEncontrada));
 
         // 4. El Service DEBE lanzar TerminosNoAceptadosException
-        assertThrows(TerminosNoAceptadosException.class, () -> {
-            inscripcionService.inscribirVisitantes(inscripcionDTO);
-        }, "Debe fallar porque los Términos y Condiciones no fueron aceptados.");
+        assertThrows(TerminosNoAceptadosException.class, () -> inscripcionService.inscribirVisitantes(inscripcionDTO), "Debe fallar porque los Términos y Condiciones no fueron aceptados.");
 
         // 5. Confirmamos que NO se llamó a ningún método de guardado
         Mockito.verify(visitanteRepository, Mockito.never()).save(Mockito.any(Visitante.class));
@@ -320,7 +312,7 @@ public class InscripcionServiceTest {
 
         // 2. Inscripcion DTO
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
-                LocalDateTime.now(),
+                LocalDateTime.of(2025, 10, 7, 15, 0),
                 actividadProgramadaId,
                 true,
                 participantesDTO
@@ -341,11 +333,10 @@ public class InscripcionServiceTest {
                 .thenReturn(Optional.of(actividadProgramadaRequerida));
 
         // 5. El Service DEBE lanzar DatosIncompletosException
-        assertThrows(DatosIncompletosException.class, () -> {
-            inscripcionService.inscribirVisitantes(inscripcionDTO);
-        }, "Debe fallar porque la actividad requiere talla de vestimenta, pero el visitante no la proporcionó.");
+        assertThrows(DatosIncompletosException.class, () -> inscripcionService.inscribirVisitantes(inscripcionDTO), "Debe fallar porque la actividad requiere talla de vestimenta, pero el visitante no la proporcionó.");
 
         // 6. Confirmamos que NO se llamó a ningún método de guardado
         Mockito.verify(visitanteRepository, Mockito.never()).save(Mockito.any(Visitante.class));
         Mockito.verify(inscripcionRepository, Mockito.never()).save(Mockito.any(Inscripcion.class));}
-}
+    }
+

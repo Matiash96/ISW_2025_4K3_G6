@@ -15,7 +15,6 @@ import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.Actividad
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.InscripcionRepository;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.TallaRepository;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.VisitanteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,18 +22,19 @@ import java.util.List;
 
 @Service
 public class InscripcionService {
+    private final InscripcionRepository inscripcionRepository;
+    private final VisitanteRepository visitanteRepository;
+    private final ActividadProgramadaRepository actividadProgramadaRepository;
+    private final TallaRepository tallaRepository;
 
-    @Autowired
-    private InscripcionRepository inscripcionRepository;
 
-    @Autowired
-    private VisitanteRepository visitanteRepository;
+    public InscripcionService(InscripcionRepository inscripcionRepository, VisitanteRepository visitanteRepository, ActividadProgramadaRepository actividadProgramadaRepository, TallaRepository tallaRepository) {
+        this.inscripcionRepository = inscripcionRepository;
+        this.visitanteRepository = visitanteRepository;
+        this.actividadProgramadaRepository = actividadProgramadaRepository;
+        this.tallaRepository = tallaRepository;
+    }
 
-    @Autowired
-    private ActividadProgramadaRepository actividadProgramadaRepository;
-
-    @Autowired
-    private TallaRepository tallaRepository;
 
     public Inscripcion inscribirVisitantes(InscripcionDTO inscripcionDTO) {
         // 1. Validar que se aceptaron los términos y condiciones
@@ -43,21 +43,25 @@ public class InscripcionService {
             throw new TerminosNoAceptadosException();
         }
 
+        // Validar que hay participantes
+        if (inscripcionDTO.getParticipantes() == null || inscripcionDTO.getParticipantes().isEmpty()) {
+            throw new DatosIncompletosException();
+        }
+
         // 2. Buscar la actividad programada
         ActividadProgramada actividadProgramada = actividadProgramadaRepository
                 .findById(inscripcionDTO.getIdActividadProgramada())
                 .orElseThrow(() -> new RuntimeException("Actividad programada no encontrada"));
 
-        // 3. Validar que hay cupo disponible
+        // 3. Validar que hay cupo disponible para todos los participantes
         if (actividadProgramada.getCupoDisponible() == null ||
-            actividadProgramada.getCupoDisponible() <= 0) {
+            actividadProgramada.getCupoDisponible() <= inscripcionDTO.getParticipantes().size()) {
             throw new CupoInsuficienteException();
         }
 
-        // 4. Validar que la inscripción se realiza dentro del horario de la actividad
+        // 4. Validar que la inscripción se realiza antes del inicio de la actividad
         if (inscripcionDTO.getFechaHoraInscripcion() != null) {
-            if (inscripcionDTO.getFechaHoraInscripcion().isBefore(actividadProgramada.getFechaHoraInicio()) ||
-                inscripcionDTO.getFechaHoraInscripcion().isAfter(actividadProgramada.getFechaHoraFin())) {
+            if (!inscripcionDTO.getFechaHoraInscripcion().isBefore(actividadProgramada.getFechaHoraInicio())) {
                 throw new HorarioNoDisponibleException();
             }
         }
@@ -65,18 +69,22 @@ public class InscripcionService {
         // 5. Procesar y guardar los visitantes
         List<Visitante> visitantes = new ArrayList<>();
         for (VisitanteDTO visitanteDTO : inscripcionDTO.getParticipantes()) {
+            // Validar datos básicos del visitante
+            if (visitanteDTO.getNombre() == null || visitanteDTO.getNombre().trim().isEmpty() ||
+                visitanteDTO.getDni() == null || visitanteDTO.getFechaNacimiento() == null) {
+                throw new DatosIncompletosException();
+            }
+
             // Validar que si la actividad requiere vestimenta, el visitante proporcione la talla
-            if (actividadProgramada.getActividad().getRequiereVestimenta()) {
-                if (visitanteDTO.getIdTallaVestimenta() == null) {
-                    throw new DatosIncompletosException();
-                }
+            if (actividadProgramada.getActividad().getRequiereVestimenta() && visitanteDTO.getIdTallaVestimenta() == null) {
+                throw new DatosIncompletosException();
             }
 
             // Crear el visitante
             Talla talla = null;
             if (visitanteDTO.getIdTallaVestimenta() != null) {
                 talla = tallaRepository.findById(visitanteDTO.getIdTallaVestimenta())
-                        .orElse(null);
+                        .orElseThrow(DatosIncompletosException::new);
             }
 
             Visitante visitante = new Visitante(
@@ -90,6 +98,10 @@ public class InscripcionService {
             Visitante visitanteGuardado = visitanteRepository.save(visitante);
             visitantes.add(visitanteGuardado);
         }
+
+        // Actualizar el cupo disponible
+        actividadProgramada.setCupoDisponible(actividadProgramada.getCupoDisponible() - visitantes.size());
+        actividadProgramadaRepository.save(actividadProgramada);
 
         // 6. Crear y guardar la inscripción
         Inscripcion inscripcion = new Inscripcion(
