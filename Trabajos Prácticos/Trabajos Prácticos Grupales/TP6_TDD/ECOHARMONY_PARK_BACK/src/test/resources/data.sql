@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS Visitantes;
 DROP TABLE IF EXISTS Inscripciones;
 DROP TABLE IF EXISTS ActividadesProgramadas;
 DROP TABLE IF EXISTS Actividades;
-DROP TABLE IF EXISTS Tallas; 
+DROP TABLE IF EXISTS Tallas;
 
 
 -- 1. CREACIÓN DE LA TABLA TALLA
@@ -97,17 +97,17 @@ INSERT INTO Visitantes (dni, nombre, edad, idTalla) VALUES
 (60101213, 'Elias Vega', 12, 1);    -- XS
 
 -- 4. Inserción en ActividadesProgramadas (6 registros)
--- Asumiendo idActividad: 1=Tirolesa, 2=Safari, 3=Palestra, etc.
+-- NOTA: Fechas ajustadas para que funcionen con los tests
 INSERT INTO ActividadesProgramadas (fechaHoraInicio, fechaHoraFin, cupoDisponible, idActividad) VALUES
-('2025-10-15 10:00:00', '2025-10-15 11:00:00', 15, 1), -- Tirolesa (Req Talla)
-('2025-10-15 14:00:00', '2025-10-15 15:00:00', 20, 2), -- Safari (No Req Talla)
-('2025-10-16 09:30:00', '2025-10-16 10:30:00', 10, 3), -- Palestra (Req Talla)
-('2025-10-16 16:00:00', '2025-10-16 17:00:00', 30, 4), -- Jardinería (No Req Talla)
-('2025-10-17 11:00:00', '2025-10-17 12:00:00', 25, 2), -- Safari (No Req Talla)
-('2025-10-17 15:00:00', '2025-10-17 16:00:00', 12, 3); -- Palestra (Req Talla)
+('2025-10-15 10:00:00', '2025-10-15 11:00:00', 15, 1), -- ID 1: Tirolesa (Req Talla)
+('2025-10-15 14:00:00', '2025-10-15 15:00:00', 20, 2), -- ID 2: Safari (No Req Talla)
+('2025-10-08 10:30:00', '2025-10-08 11:30:00', 30, 3), -- ID 3: Palestra (Req Talla) - Para tests
+('2025-10-08 14:00:00', '2025-10-08 15:00:00', 0, 4),  -- ID 4: Jardinería CUPO 0 - Para test sin cupo
+('2025-10-17 11:00:00', '2025-10-17 12:00:00', 25, 2), -- ID 5: Safari (No Req Talla)
+('2025-11-01 09:00:00', '2025-11-01 10:30:00', 50, 2); -- ID 6: Safari (No Req Talla) - Para test sin talla
 
--- 5. Inserción en Inscripciones (6 registros)
--- Los idActividadProgramada coinciden con los de la tabla anterior (1 a 6)
+-- 5. Inserción en Inscripciones (4 registros)
+-- Los idActividadProgramada coinciden con los de la tabla anterior (1 a 4)
 INSERT INTO Inscripciones (aceptanTyC, idActividadProgramada) VALUES
 (1, 1), -- Ana y Juan se inscriben a Tirolesa
 (1, 2), -- Laura se inscribe a Safari

@@ -19,7 +19,7 @@ public class VisitanteService {
     }
 
     public Optional<Visitante> obtenerPorDni(Integer dni) {
-        return visitanteRepository.findById(dni);
+        return visitanteRepository.findByDni(dni);
     }
 
     public Visitante guardar(Visitante visitante) {

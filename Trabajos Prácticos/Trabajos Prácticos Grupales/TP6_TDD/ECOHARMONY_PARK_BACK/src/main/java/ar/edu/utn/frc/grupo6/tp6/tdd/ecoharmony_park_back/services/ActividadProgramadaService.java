@@ -5,8 +5,10 @@ import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.Actividad
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ActividadProgramadaService {
@@ -28,5 +30,14 @@ public class ActividadProgramadaService {
 
     public void eliminar(Long id) {
         actividadProgramadaRepository.deleteById(id);
+    }
+
+    public List<ActividadProgramada> obtenerActividadesProgramadasDisponiblesPorActividad(Long idActividad, LocalDateTime fechaActual) {
+        List<ActividadProgramada> todasLasActividadesProgramadas = actividadProgramadaRepository.findAll();
+
+        return todasLasActividadesProgramadas.stream()
+                .filter(ap -> ap.getActividad().getId().equals(idActividad))
+                .filter(ap -> ap.getFechaHoraInicio().isAfter(fechaActual))
+                .collect(Collectors.toList());
     }
 }

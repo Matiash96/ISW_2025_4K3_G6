@@ -18,7 +18,6 @@ public class ActividadProgramada {
     @Column(name = "idActividadProgramada")
     private Long id;
 
-    // ?? 
     @Column(name = "fechaHoraInicio", nullable = false)
     private LocalDateTime fechaHoraInicio;
 

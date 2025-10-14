@@ -20,7 +20,6 @@ public class Actividad {
     private String nombre;
 
     @Column(name = "requiereVestimenta", nullable = false)
-    @Convert(converter = org.hibernate.type.YesNoConverter.class)
     private Boolean requiereVestimenta;
 
     @Column(name = "terminosYCondiciones", nullable = false)

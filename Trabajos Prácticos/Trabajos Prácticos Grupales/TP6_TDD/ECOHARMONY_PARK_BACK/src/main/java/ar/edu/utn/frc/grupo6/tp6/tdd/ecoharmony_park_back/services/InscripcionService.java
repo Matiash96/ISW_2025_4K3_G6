@@ -50,7 +50,7 @@ public class InscripcionService {
 
         // 2. Buscar la actividad programada
         ActividadProgramada actividadProgramada = actividadProgramadaRepository
-                .findById(inscripcionDTO.getIdActividadProgramada())
+                .findById(inscripcionDTO.getActividadProgramadaId())
                 .orElseThrow(() -> new RuntimeException("Actividad programada no encontrada"));
 
         // 3. Validar que hay cupo disponible para todos los participantes
@@ -59,9 +59,10 @@ public class InscripcionService {
             throw new CupoInsuficienteException();
         }
 
-        // 4. Validar que la inscripción se realiza antes del inicio de la actividad
+        // 4. Validar que la inscripción se realiza dentro del horario de la actividad
         if (inscripcionDTO.getFechaHoraInscripcion() != null) {
-            if (!inscripcionDTO.getFechaHoraInscripcion().isBefore(actividadProgramada.getFechaHoraInicio())) {
+            if (inscripcionDTO.getFechaHoraInscripcion().isBefore(actividadProgramada.getFechaHoraInicio()) ||
+                inscripcionDTO.getFechaHoraInscripcion().isAfter(actividadProgramada.getFechaHoraFin())) {
                 throw new HorarioNoDisponibleException();
             }
         }
@@ -76,14 +77,14 @@ public class InscripcionService {
             }
 
             // Validar que si la actividad requiere vestimenta, el visitante proporcione la talla
-            if (actividadProgramada.getActividad().getRequiereVestimenta() && visitanteDTO.getIdTallaVestimenta() == null) {
+            if (actividadProgramada.getActividad().getRequiereVestimenta() && visitanteDTO.getTallaId() == null) {
                 throw new DatosIncompletosException();
             }
 
             // Crear el visitante
             Talla talla = null;
-            if (visitanteDTO.getIdTallaVestimenta() != null) {
-                talla = tallaRepository.findById(visitanteDTO.getIdTallaVestimenta())
+            if (visitanteDTO.getTallaId() != null) {
+                talla = tallaRepository.findById(visitanteDTO.getTallaId())
                         .orElseThrow(DatosIncompletosException::new);
             }
 
