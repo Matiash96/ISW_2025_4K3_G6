@@ -2,7 +2,7 @@
 
 import './App.css'
 import './styles/globals.css'
-import ActivityRegistrationForm from "./components/activity-registration-form"
+import ActivityRegistrationForm from "./components/ActivityRegistrationForm"
 
 function App() {
 
