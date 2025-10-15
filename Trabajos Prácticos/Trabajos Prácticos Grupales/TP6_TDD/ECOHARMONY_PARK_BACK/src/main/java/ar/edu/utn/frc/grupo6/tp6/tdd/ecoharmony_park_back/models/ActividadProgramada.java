@@ -1,5 +1,6 @@
 package ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.models;
 
+import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.config.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +19,12 @@ public class ActividadProgramada {
     @Column(name = "idActividadProgramada")
     private Long id;
 
-    @Column(name = "fechaHoraInicio", nullable = false)
+    @Column(name = "fechaHoraInicio", nullable = false, columnDefinition = "TEXT")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaHoraInicio;
 
-    @Column(name = "fechaHoraFin", nullable = false)
+    @Column(name = "fechaHoraFin", nullable = false, columnDefinition = "TEXT")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaHoraFin;
 
     @Column(name = "cupoDisponible", nullable = false)

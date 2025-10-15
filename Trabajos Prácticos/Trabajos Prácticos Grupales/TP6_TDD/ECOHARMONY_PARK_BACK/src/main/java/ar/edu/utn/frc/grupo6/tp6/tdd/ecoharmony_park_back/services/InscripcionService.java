@@ -55,14 +55,13 @@ public class InscripcionService {
 
         // 3. Validar que hay cupo disponible para todos los participantes
         if (actividadProgramada.getCupoDisponible() == null ||
-            actividadProgramada.getCupoDisponible() <= inscripcionDTO.getParticipantes().size()) {
+            actividadProgramada.getCupoDisponible() < inscripcionDTO.getParticipantes().size()) {
             throw new CupoInsuficienteException();
         }
 
-        // 4. Validar que la inscripción se realiza dentro del horario de la actividad
+        // 4. Validar que la inscripción se realiza fuera del horario de la actividad
         if (inscripcionDTO.getFechaHoraInscripcion() != null) {
-            if (inscripcionDTO.getFechaHoraInscripcion().isBefore(actividadProgramada.getFechaHoraInicio()) ||
-                inscripcionDTO.getFechaHoraInscripcion().isAfter(actividadProgramada.getFechaHoraFin())) {
+            if (inscripcionDTO.getFechaHoraInscripcion().isAfter(actividadProgramada.getFechaHoraInicio())) {
                 throw new HorarioNoDisponibleException();
             }
         }

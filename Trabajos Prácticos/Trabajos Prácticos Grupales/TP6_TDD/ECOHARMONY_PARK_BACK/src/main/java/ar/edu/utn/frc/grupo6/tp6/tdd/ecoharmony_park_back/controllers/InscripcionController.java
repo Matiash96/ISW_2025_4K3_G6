@@ -157,7 +157,7 @@ public class InscripcionController {
         } catch (ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.CupoInsuficienteException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("{\"error\": \"No hay cupo suficiente para la cantidad de visitantes solicitada\"}");
         } catch (ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.HorarioNoDisponibleException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("{\"error\": \"La inscripción debe realizarse dentro del horario de la actividad\"}");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("{\"error\": \"La inscripción debe realizarse antes del horario de la actividad\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"Error interno del servidor\"}");
         }

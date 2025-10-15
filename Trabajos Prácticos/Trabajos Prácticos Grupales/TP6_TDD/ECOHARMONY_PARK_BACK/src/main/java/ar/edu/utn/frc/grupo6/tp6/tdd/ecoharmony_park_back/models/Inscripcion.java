@@ -1,5 +1,6 @@
 package ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.models;
 
+import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.config.LocalDateTimeConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +20,8 @@ public class Inscripcion {
     @Column(name = "idInscripcion")
     private Long id;
 
-    @Column(name = "fechaHoraInscripcion", nullable = false)
+    @Column(name = "fechaHoraInscripcion", nullable = false, columnDefinition = "TEXT")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime fechaHoraInscripcion;
 
     @ManyToOne(fetch = FetchType.EAGER)
