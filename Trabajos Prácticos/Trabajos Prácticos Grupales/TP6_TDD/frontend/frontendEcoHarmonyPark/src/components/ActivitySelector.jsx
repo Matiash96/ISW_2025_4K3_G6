@@ -12,7 +12,7 @@ export default function ActivitySelector({ activities, selectedActivity, onChang
         <option value="">Seleccione una actividad</option>
         {activities.map((a) => (
           <option key={a.id} value={a.id}>
-            {a.name}
+            {a.nombre}
           </option>
         ))}
       </select>

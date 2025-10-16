@@ -9,6 +9,7 @@ export default function ParticipantForm({
   next,
   prev,
   errors,
+  tallas = [],
 }) {
   return (
     <div className="border rounded p-3 mb-3 bg-light">
@@ -54,18 +55,25 @@ export default function ParticipantForm({
       {requiresClothingSize && (
         <div className="mb-2">
           <label className="form-label">Talle de vestimenta</label>
-          <input
-            className={`form-control ${errors[`size_${index}`] ? "is-invalid" : ""}`}
-            value={participant.clothingSize}
+          <select
+            className={`form-select ${errors[`size_${index}`] ? "is-invalid" : ""}`}
+            value={participant.clothingSize ?? ""}         // guarda el ID de la talla
             onChange={(e) => onChange(index, "clothingSize", e.target.value)}
-          />
-          {errors[`size_${index}`] && (
-            <div className="invalid-feedback">{errors[`size_${index}`]}</div>
-          )}
+            disabled={!tallas.length}
+          >
+            <option value="">Seleccione un talle</option>
+            {tallas.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.nombre}
+              </option>
+            ))}
+          </select>
+          {errors[`size_${index}`] && <div className="invalid-feedback">{errors[`size_${index}`]}</div>}
         </div>
       )}
 
       <div className="d-flex justify-content-between mt-3">
+        
         <button
           type="button"
           className="btn btn-outline-secondary"
@@ -74,6 +82,7 @@ export default function ParticipantForm({
         >
           Anterior
         </button>
+        
         <button
           type="button"
           className="btn btn-outline-primary"
@@ -82,6 +91,7 @@ export default function ParticipantForm({
         >
           Siguiente
         </button>
+        
       </div>
     </div>
   );
