@@ -8,6 +8,7 @@ import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.DatosIncomp
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.HorarioNoDisponibleException;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.HorarioInscripcionInvalidoException;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.TerminosNoAceptadosException;
+import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.VisitanteDuplicadoException;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.models.ActividadProgramada;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.models.Inscripcion;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.models.Talla;
@@ -20,7 +21,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class InscripcionService {
@@ -50,10 +53,34 @@ public class InscripcionService {
             throw new DatosIncompletosException();
         }
 
+        // Validar que no hay DNIs duplicados en la misma inscripción
+        Set<Integer> dnisUnicos = new HashSet<>();
+        for (VisitanteDTO visitanteDTO : inscripcionDTO.getParticipantes()) {
+            if (visitanteDTO.getDni() != null) {
+                if (!dnisUnicos.add(visitanteDTO.getDni())) {
+                    throw new VisitanteDuplicadoException("No se pueden inscribir visitantes con el mismo DNI en una misma inscripción");
+                }
+            }
+        }
+
         // 2. Buscar la actividad programada
         ActividadProgramada actividadProgramada = actividadProgramadaRepository
                 .findById(inscripcionDTO.getActividadProgramadaId())
                 .orElseThrow(() -> new RuntimeException("Actividad programada no encontrada"));
+
+        // Validar que los visitantes no estén ya inscritos en esta actividad programada
+        for (VisitanteDTO visitanteDTO : inscripcionDTO.getParticipantes()) {
+            if (visitanteDTO.getDni() != null) {
+                List<Inscripcion> inscripcionesExistentes = inscripcionRepository
+                        .findByActividadProgramadaIdAndVisitanteDni(
+                                inscripcionDTO.getActividadProgramadaId(),
+                                visitanteDTO.getDni()
+                        );
+                if (!inscripcionesExistentes.isEmpty()) {
+                    throw new VisitanteDuplicadoException("El visitante con DNI " + visitanteDTO.getDni() + " ya está inscrito en esta actividad programada");
+                }
+            }
+        }
 
         // 3. Validar que hay cupo disponible para todos los participantes
         if (actividadProgramada.getCupoDisponible() == null ||

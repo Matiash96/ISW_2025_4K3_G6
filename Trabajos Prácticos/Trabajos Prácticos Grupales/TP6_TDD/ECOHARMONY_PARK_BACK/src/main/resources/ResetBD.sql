@@ -99,20 +99,20 @@ INSERT INTO Visitantes (dni, nombre, edad, idTalla) VALUES
 -- 4. Inserción en ActividadesProgramadas (6 registros)
 -- Asumiendo idActividad: 1=Tirolesa, 2=Safari, 3=Palestra, etc.
 INSERT INTO ActividadesProgramadas (fechaHoraInicio, fechaHoraFin, cupoDisponible, idActividad) VALUES
-('2025-10-15 10:00:00', '2025-10-15 11:00:00', 15, 1), -- Tirolesa (Req Talla)
-('2025-10-15 14:00:00', '2025-10-15 15:00:00', 20, 2), -- Safari (No Req Talla)
-('2025-10-16 09:30:00', '2025-10-16 10:30:00', 10, 3), -- Palestra (Req Talla)
-('2025-10-16 16:00:00', '2025-10-16 17:00:00', 30, 4), -- Jardinería (No Req Talla)
-('2025-10-17 11:00:00', '2025-10-17 12:00:00', 25, 2), -- Safari (No Req Talla)
-('2025-10-17 15:00:00', '2025-10-17 16:00:00', 12, 3); -- Palestra (Req Talla)
+('2025-10-25 10:00:00', '2025-10-25 11:00:00', 15, 1), -- Tirolesa (Req Talla)
+('2025-10-25 14:00:00', '2025-10-25 15:00:00', 20, 2), -- Safari (No Req Talla)
+('2025-10-26 09:30:00', '2025-10-26 10:30:00', 10, 3), -- Palestra (Req Talla)
+('2025-10-26 16:00:00', '2025-10-26 17:00:00', 30, 4), -- Jardinería (No Req Talla)
+('2025-10-27 11:00:00', '2025-10-27 12:00:00', 25, 2), -- Safari (No Req Talla)
+('2025-10-27 15:00:00', '2025-10-27 16:00:00', 12, 3); -- Palestra (Req Talla)
 
 -- 5. Inserción en Inscripciones (6 registros)
 -- Los idActividadProgramada coinciden con los de la tabla anterior (1 a 6)
 INSERT INTO Inscripciones (aceptanTyC, idActividadProgramada) VALUES
-(1, 1), -- Ana y Juan se inscriben a Tirolesa
-(1, 2), -- Laura se inscribe a Safari
-(1, 3), -- Carlos se inscribe a Palestra
-(1, 4); -- Marta y Elias se inscriben a Jardinería
+('Y', 1), -- Ana y Juan se inscriben a Tirolesa
+('Y', 2), -- Laura se inscribe a Safari
+('Y', 3), -- Carlos se inscribe a Palestra
+('Y', 4); -- Marta y Elias se inscriben a Jardinería
 
 -- 6. Inserción en InscripcionesXVisitantes (6 registros)
 -- Relación de visitantes a inscripciones (muchos a muchos)

@@ -154,6 +154,8 @@ public class InscripcionController {
             return ResponseEntity.badRequest().body("{\"error\": \"Debe aceptar los términos y condiciones para realizar la inscripción\"}");
         } catch (ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.DatosIncompletosException e) {
             return ResponseEntity.badRequest().body("{\"error\": \"Faltan datos obligatorios del visitante o la talla es requerida para esta actividad\"}");
+        } catch (ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.VisitanteDuplicadoException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("{\"error\": \"" + e.getMessage() + "\"}");
         } catch (ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.CupoInsuficienteException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("{\"error\": \"No hay cupo suficiente para la cantidad de visitantes solicitada\"}");
         } catch (ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.HorarioNoDisponibleException e) {
