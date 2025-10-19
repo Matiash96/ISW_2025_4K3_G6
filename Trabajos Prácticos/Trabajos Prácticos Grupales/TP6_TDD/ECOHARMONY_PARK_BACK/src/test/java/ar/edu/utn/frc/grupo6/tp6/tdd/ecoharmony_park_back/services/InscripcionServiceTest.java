@@ -47,7 +47,7 @@ public class InscripcionServiceTest {
         VisitanteDTO visitanteDTO2 = new VisitanteDTO("Johnny Loconozco", 44444443, 22, 1L);
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO1, visitanteDTO2);
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
-                LocalDateTime.of(2025, 10, 8, 10, 45, 0), // Cambiado para estar dentro del horario 10:30-11:30
+                LocalDateTime.of(2025, 10, 8, 9, 45, 0), // Cambiado para estar dentro del horario 10:30-11:30
                 actividadProgramadaId,
                 true,
                 participantesDTO
@@ -164,7 +164,7 @@ public class InscripcionServiceTest {
 
         // 3. Inscripcion DTO
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
-                LocalDateTime.of(2025, 11, 1, 9, 30, 0), // Cambiado para estar dentro del horario 9:00-10:30
+                LocalDateTime.of(2025, 11, 1, 9, 0, 0), // Cambiado para estar dentro del horario 9:00-10:30
                 actividadProgramadaId,
                 true,
                 participantesDTO
@@ -174,7 +174,7 @@ public class InscripcionServiceTest {
         // 4. Actividad Programada que se busca (debe existir)
         ActividadProgramada actividadProgramadaEncontrada = new ActividadProgramada(
                 actividadProgramadaId,
-                LocalDateTime.of(2025, 11, 1, 9, 0),
+                LocalDateTime.of(2025, 11, 1, 9, 30),
                 LocalDateTime.of(2025, 11, 1, 10, 30),
                 50,
                 actividadBase
@@ -312,7 +312,7 @@ public class InscripcionServiceTest {
 
         // 2. Inscripcion DTO
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
-                LocalDateTime.of(2025, 10, 8, 14, 30, 0), // Agregado parámetro de fecha faltante
+                LocalDateTime.of(2025, 10, 8, 13, 30, 0), // Agregado parámetro de fecha faltante
                 actividadProgramadaId,
                 true,
                 participantesDTO

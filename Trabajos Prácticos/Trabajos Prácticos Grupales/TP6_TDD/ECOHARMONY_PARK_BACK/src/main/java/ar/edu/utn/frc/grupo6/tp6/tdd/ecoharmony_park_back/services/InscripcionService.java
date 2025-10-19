@@ -6,6 +6,7 @@ import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.data.VisitanteDTO;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.CupoInsuficienteException;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.DatosIncompletosException;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.HorarioNoDisponibleException;
+import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.HorarioInscripcionInvalidoException;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.exceptions.TerminosNoAceptadosException;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.models.ActividadProgramada;
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.models.Inscripcion;
@@ -17,6 +18,7 @@ import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.TallaRepo
 import ar.edu.utn.frc.grupo6.tp6.tdd.ecoharmony_park_back.repositories.VisitanteRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +68,23 @@ public class InscripcionService {
             }
         }
 
-        // 5. Procesar y guardar los visitantes
+        // 5. Validar que el horario de inscripción sea entre 9:00 y 18:00 y no sea lunes
+        if (inscripcionDTO.getFechaHoraInscripcion() != null) {
+            int hora = inscripcionDTO.getFechaHoraInscripcion().getHour();
+            DayOfWeek diaDeLaSemana = inscripcionDTO.getFechaHoraInscripcion().getDayOfWeek();
+
+            // Validar que no sea lunes
+            if (diaDeLaSemana == DayOfWeek.MONDAY) {
+                throw new HorarioInscripcionInvalidoException("No se permiten inscripciones los días lunes");
+            }
+
+            // Validar que la hora esté entre 9:00 y 18:00
+            if (hora < 9 || hora >= 18) {
+                throw new HorarioInscripcionInvalidoException("El horario de inscripción debe ser entre las 9:00 y las 18:00 horas");
+            }
+        }
+
+        // 6. Procesar y guardar los visitantes
         List<Visitante> visitantes = new ArrayList<>();
         for (VisitanteDTO visitanteDTO : inscripcionDTO.getParticipantes()) {
             // Validar datos básicos del visitante
@@ -103,7 +121,7 @@ public class InscripcionService {
         actividadProgramada.setCupoDisponible(actividadProgramada.getCupoDisponible() - visitantes.size());
         actividadProgramadaRepository.save(actividadProgramada);
 
-        // 6. Crear y guardar la inscripción
+        // 7. Crear y guardar la inscripción
         Inscripcion inscripcion = new Inscripcion(
                 null, // El ID se generará automáticamente
                 inscripcionDTO.getFechaHoraInscripcion(),

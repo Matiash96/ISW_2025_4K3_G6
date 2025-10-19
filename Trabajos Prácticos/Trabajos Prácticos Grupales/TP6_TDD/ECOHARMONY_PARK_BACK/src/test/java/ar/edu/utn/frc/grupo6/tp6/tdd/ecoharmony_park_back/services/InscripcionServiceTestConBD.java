@@ -41,7 +41,7 @@ public class InscripcionServiceTestConBD {
         VisitanteDTO visitanteDTO2 = new VisitanteDTO("Johnny Loconozco", 44444443, 22, 1L);
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO1, visitanteDTO2);
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
-                LocalDateTime.of(2025, 10, 8, 10, 45, 0), // Inscripción durante el horario de la actividad (10:30-11:30)
+                LocalDateTime.of(2025, 10, 8, 10, 0, 0), // Inscripción durante el horario de la actividad (10:30-11:30)
                 actividadProgramadaId,
                 true,
                 participantesDTO
@@ -100,7 +100,7 @@ public class InscripcionServiceTestConBD {
         final Long actividadProgramadaId = 6L;
         VisitanteDTO visitanteDTO = new VisitanteDTO("Juan Perez", 55555555, 21, null);
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
-                LocalDateTime.of(2025, 11, 1, 9, 30, 0), // Inscripción durante el horario de la actividad (09:00-10:30)
+                LocalDateTime.of(2025, 10, 30, 9, 30, 0), // Inscripción durante el horario de la actividad (09:00-10:30)
                 actividadProgramadaId,
                 true,
                 List.of(visitanteDTO)
@@ -122,7 +122,7 @@ public class InscripcionServiceTestConBD {
     public void testInscribirseActividadHorarioNoDisponible() {
         // Arrange: La actividad con ID 3 es de 10:30 a 11:30. La inscripción es a las 9:00.
         final Long actividadProgramadaId = 3L;
-        final LocalDateTime horaInscripcionTemprana = LocalDateTime.of(2025, 10, 8, 9, 0, 0);
+        final LocalDateTime horaInscripcionTemprana = LocalDateTime.of(2025, 10, 8, 15, 0, 0);
         VisitanteDTO visitanteDTO = new VisitanteDTO("Ana Temporal", 66666666, 21, 1L);
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
                 horaInscripcionTemprana,
@@ -163,7 +163,7 @@ public class InscripcionServiceTestConBD {
         final Long actividadProgramadaId = 3L;
         VisitanteDTO visitanteDTO = new VisitanteDTO("Dani Vestimenta", 88888888, 21, null); // Talla es null
         InscripcionDTO inscripcionDTO = new InscripcionDTO(
-                LocalDateTime.of(2025, 10, 8, 10, 45, 0), // Inscripción durante el horario válido
+                LocalDateTime.of(2025, 10, 8, 10, 0, 0), // Inscripción durante el horario válido
                 actividadProgramadaId,
                 true,
                 List.of(visitanteDTO)
