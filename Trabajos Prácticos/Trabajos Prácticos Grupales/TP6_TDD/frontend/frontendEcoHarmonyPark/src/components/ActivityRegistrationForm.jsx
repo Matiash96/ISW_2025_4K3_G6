@@ -80,7 +80,8 @@ export default function ActivityRegistrationForm() {
         );
       }
     } catch (e) {
-      console.error(e);
+      console.error("Error al obtener actividades programadas:", e);
+      console.error("Respuesta del servidor:", e.response?.data);
       setStatus("error");
     }
   };
