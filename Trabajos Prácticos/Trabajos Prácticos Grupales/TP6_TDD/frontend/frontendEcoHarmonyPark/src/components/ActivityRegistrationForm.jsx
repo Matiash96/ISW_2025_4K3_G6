@@ -131,8 +131,16 @@ export default function ActivityRegistrationForm() {
     if (!termsAccepted) newErrors.terms = "Debe aceptar los términos";
     participants.forEach((p, i) => {
       if (!p.name.trim()) newErrors[`name_${i}`] = "Nombre requerido";
-      if (!p.dni.trim()) newErrors[`dni_${i}`] = "DNI requerido";
-      if (!p.age) newErrors[`age_${i}`] = "Edad requerida";
+      if (!p.dni.trim()) {
+        newErrors[`dni_${i}`] = "DNI requerido";
+      } else if (Number(p.dni) <= 0) {
+        newErrors[`dni_${i}`] = "DNI debe ser mayor a 0";
+      }
+      if (!p.age) {
+        newErrors[`age_${i}`] = "Edad requerida";
+      } else if (Number(p.age) < 0) {
+        newErrors[`age_${i}`] = "Edad no puede ser negativa";
+      }
       if (selectedActivity?.requiresClothingSize && !p.clothingSize)
         newErrors[`size_${i}`] = "Talle requerido";
     });
@@ -143,8 +151,16 @@ export default function ActivityRegistrationForm() {
   const validateParticipant = (participant) => {
     const newErrors = {};
     if (!participant.name.trim()) newErrors[`name`] = "Nombre requerido";
-    if (!participant.dni.trim()) newErrors[`dni`] = "DNI requerido";
-    if (!participant.age) newErrors[`age`] = "Edad requerida";
+    if (!participant.dni.trim()) {
+      newErrors[`dni`] = "DNI requerido";
+    } else if (Number(participant.dni) <= 0) {
+      newErrors[`dni`] = "DNI debe ser mayor a 0";
+    }
+    if (!participant.age) {
+      newErrors[`age`] = "Edad requerida";
+    } else if (Number(participant.age) < 0) {
+      newErrors[`age`] = "Edad no puede ser negativa";
+    }
     if (selectedActivity?.requiresClothingSize && !participant.clothingSize)
       newErrors[`size`] = "Talle requerido";
     setErrors(newErrors);

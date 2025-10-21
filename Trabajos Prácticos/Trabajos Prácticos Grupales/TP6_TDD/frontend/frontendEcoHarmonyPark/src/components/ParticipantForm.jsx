@@ -30,9 +30,23 @@ export default function ParticipantForm({
       <div className="mb-2">
         <label className="form-label">DNI</label>
         <input
+          type="number"
+          min="1"
           className={`form-control ${errors[`dni_${index}`] ? "is-invalid" : ""}`}
           value={participant.dni}
-          onChange={(e) => onChange(index, "dni", e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            // Solo permitir números positivos mayores a 0
+            if (value === "" || (Number(value) > 0 && !value.includes('-') && !value.includes('.'))) {
+              onChange(index, "dni", value);
+            }
+          }}
+          onKeyDown={(e) => {
+            // Prevenir el ingreso de caracteres no numéricos, signos negativos y puntos
+            if (e.key === '-' || e.key === '.' || e.key === 'e' || e.key === 'E' || e.key === '+') {
+              e.preventDefault();
+            }
+          }}
         />
         {errors[`dni_${index}`] && (
           <div className="invalid-feedback">{errors[`dni_${index}`]}</div>
@@ -43,9 +57,22 @@ export default function ParticipantForm({
         <label className="form-label">Edad</label>
         <input
           type="number"
+          min="0"
           className={`form-control ${errors[`age_${index}`] ? "is-invalid" : ""}`}
           value={participant.age}
-          onChange={(e) => onChange(index, "age", e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            // Solo permitir números no negativos
+            if (value === "" || (Number(value) >= 0 && !value.includes('-'))) {
+              onChange(index, "age", value);
+            }
+          }}
+          onKeyDown={(e) => {
+            // Prevenir el ingreso de signos negativos
+            if (e.key === '-' || e.key === 'e' || e.key === 'E' || e.key === '+') {
+              e.preventDefault();
+            }
+          }}
         />
         {errors[`age_${index}`] && (
           <div className="invalid-feedback">{errors[`age_${index}`]}</div>
