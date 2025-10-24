@@ -123,7 +123,7 @@ export default function ActivityRegistrationForm() {
     setNumberOfParticipants(num);
   };
 
-  // --- validaciones (igual que tenías) ---
+  
   const validate = () => {
     const newErrors = {};
     if (!selectedActivity) newErrors.activity = "Seleccione una actividad";
@@ -391,7 +391,7 @@ export default function ActivityRegistrationForm() {
           <form onSubmit={handleSubmit}>
             <fieldset>
             <ActivitySelector
-              activities={activities}               // ahora viene del backend
+              activities={activities}              
               selectedActivity={selectedActivity}
               onChange={handleActivityChange}
               error={errors.activity}
