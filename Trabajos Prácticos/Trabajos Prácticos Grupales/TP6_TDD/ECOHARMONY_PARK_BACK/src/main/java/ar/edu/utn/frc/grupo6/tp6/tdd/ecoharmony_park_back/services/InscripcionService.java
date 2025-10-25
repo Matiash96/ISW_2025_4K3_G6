@@ -85,7 +85,7 @@ public class InscripcionService {
         // 3. Validar que hay cupo disponible para todos los participantes
         if (actividadProgramada.getCupoDisponible() == null ||
             actividadProgramada.getCupoDisponible() < inscripcionDTO.getParticipantes().size()) {
-            throw new CupoInsuficienteException();
+            throw new CupoInsuficienteException("No hay la suficiente cantidad de cupos para participantes");
         }
 
         // 4. Validar que la inscripción se realiza fuera del horario de la actividad

@@ -41,9 +41,9 @@ public class InscripcionServiceTest {
     @Test
     public void testInscribirseConCupoHorarioDatosVisitanteTyCValidos() {
 
-        // Fabricamos la inscripción que va a recibir por parámetro el service
+        // Fabricamos la inscripción que va a recibir por parámetro el service edad minima tiroleda >
         final Long actividadProgramadaId = 3L;
-        VisitanteDTO visitanteDTO1 = new VisitanteDTO("Johnny Lojuno", 44444444, 21, 1L); // Asumo que el DTO usa Long para DNI y ID de Talla
+        VisitanteDTO visitanteDTO1 = new VisitanteDTO("Johnny Lojuno", 1000, 0, 1L); // Asumo que el DTO usa Long para DNI y ID de Talla
         VisitanteDTO visitanteDTO2 = new VisitanteDTO("Johnny Loconozco", 44444443, 22, 1L);
         List<VisitanteDTO> participantesDTO = List.of(visitanteDTO1, visitanteDTO2);
         InscripcionDTO inscripcionDTO = new InscripcionDTO(

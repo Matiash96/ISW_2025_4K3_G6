@@ -11,6 +11,9 @@ export default function ParticipantForm({
   errors,
   tallas = [],
 }) {
+  // Safety: ensure participant is always an object to avoid crashes if parent
+  // temporarily passes undefined (race conditions when changing counts).
+  const p = participant ?? { name: "", dni: "", age: "", clothingSize: "" };
   return (
     <div className="border rounded p-3 mb-3 bg-light">
       <h5>Participante {index + 1} de {total}</h5>
@@ -19,7 +22,7 @@ export default function ParticipantForm({
         <label className="form-label">Nombre</label>
         <input
           className={`form-control ${errors[`name_${index}`] ? "is-invalid" : ""}`}
-          value={participant.name}
+          value={p.name}
           onChange={(e) => onChange(index, "name", e.target.value)}
         />
         {errors[`name_${index}`] && (
@@ -33,7 +36,7 @@ export default function ParticipantForm({
           type="number"
           min="1"
           className={`form-control ${errors[`dni_${index}`] ? "is-invalid" : ""}`}
-          value={participant.dni}
+          value={p.dni}
           onChange={(e) => {
             const value = e.target.value;
             // Solo permitir números positivos mayores a 0
@@ -59,7 +62,7 @@ export default function ParticipantForm({
           type="number"
           min="0"
           className={`form-control ${errors[`age_${index}`] ? "is-invalid" : ""}`}
-          value={participant.age}
+          value={p.age}
           onChange={(e) => {
             const value = e.target.value;
             // Solo permitir números no negativos
@@ -84,7 +87,7 @@ export default function ParticipantForm({
           <label className="form-label">Talle de vestimenta</label>
           <select
             className={`form-select ${errors[`size_${index}`] ? "is-invalid" : ""}`}
-            value={participant.clothingSize ?? ""}         // guarda el ID de la talla
+            value={p.clothingSize ?? ""}         // guarda el ID de la talla
             onChange={(e) => onChange(index, "clothingSize", e.target.value)}
             disabled={!tallas.length}
           >

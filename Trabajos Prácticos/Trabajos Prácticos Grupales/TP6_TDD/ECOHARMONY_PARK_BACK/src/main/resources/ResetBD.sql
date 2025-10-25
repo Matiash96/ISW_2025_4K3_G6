@@ -100,7 +100,7 @@ INSERT INTO Visitantes (dni, nombre, edad, idTalla) VALUES
 -- Asumiendo idActividad: 1=Tirolesa, 2=Safari, 3=Palestra, etc.
 INSERT INTO ActividadesProgramadas (fechaHoraInicio, fechaHoraFin, cupoDisponible, idActividad) VALUES
 ('2025-10-25 10:00:00', '2025-10-25 11:00:00', 15, 1), -- Tirolesa (Req Talla)
-('2025-10-25 14:00:00', '2025-10-25 15:00:00', 20, 2), -- Safari (No Req Talla)
+('2025-10-25 14:00:00', '2025-10-25 15:00:00', 2, 2), -- Safari (No Req Talla)
 ('2025-10-26 09:30:00', '2025-10-26 10:30:00', 10, 3), -- Palestra (Req Talla)
 ('2025-10-26 16:00:00', '2025-10-26 17:00:00', 30, 4), -- Jardinería (No Req Talla)
 ('2025-10-27 11:00:00', '2025-10-27 12:00:00', 25, 2), -- Safari (No Req Talla)

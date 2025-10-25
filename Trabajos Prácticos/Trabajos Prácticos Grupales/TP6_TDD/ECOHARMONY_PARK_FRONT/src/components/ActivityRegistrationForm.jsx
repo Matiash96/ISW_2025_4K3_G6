@@ -121,6 +121,9 @@ export default function ActivityRegistrationForm() {
     }
     setParticipants(updated);
     setNumberOfParticipants(num);
+    // Si el índice actual queda fuera del nuevo rango (p. ej. bajaron de 3 a 1),
+    // lo ajustamos para evitar mostrar "Participante 3 de 1".
+    setCurrentIndex((ci) => Math.min(ci, num - 1));
   };
 
   
@@ -425,14 +428,15 @@ export default function ActivityRegistrationForm() {
 
             <fieldset disabled={!canEditParticipants} className={!canEditParticipants ? "section--disabled" : ""}>
             <ParticipantForm
-              participant={participants[currentIndex]}
+              participant={participants[currentIndex] ?? { name: "", dni: "", age: "", clothingSize: "" }}
               index={currentIndex}
               total={numberOfParticipants}
               onChange={handleParticipantChange}
               requiresClothingSize={selectedActivity?.requiresClothingSize}
               tallas={tallas}
               next={() => {
-                 if (!validateParticipant(participants[currentIndex])) {
+                 const currentParticipant = participants[currentIndex] ?? { name: "", dni: "", age: "", clothingSize: "" };
+                 if (!validateParticipant(currentParticipant)) {
                     console.log("entre")
                     setStatus("errorFaltanDatos");
                     return;
