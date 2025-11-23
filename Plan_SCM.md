@@ -35,7 +35,7 @@ Repositorio de Ingeniería y Calidad de Software
 | Bibliografía                       | Recurso | `[Título-del-libro]_[Nombre-autor].pdf ` | `/Bibliografía/[Tema]/`                                     |
 | Presentaciones de Clase            | Recurso | `[M]_[Tema].pdf`                         | `/Presentaciones de Clase/`                               |
 | Trabajos Prácticos Grupales        | Trabajo | `TP[N]_[Tema].[EXT]`                     | `/Trabajos Prácticos/Trabajos Prácticos Grupales/`        |
-| Trabajos de Investigación Grupales | Trabajo | `TP[N]_[Tema].[EXT]`                     | `/Trabajos Prácticos/Trabajos de Investigación Grupales/` | 
+| Trabajos de Investigación Grupales | Trabajo | `TPI_[Entrega]_[Detalle].[EXT]`                     | `/Trabajos Prácticos/Trabajos de Investigación Grupales/` | 
 | Guía de TPE                        | Trabajo | `Guía_de_TPE.pdf`                        | `/Trabajos Prácticos/Trabajos Prácticos Grupales/`        |
 | Lineamientos para TIG              | Trabajo | `Lineamientos_para_TIG.pdf`              | `/Trabajos Prácticos/Trabajos de Investigación Grupales/` |
 | Ejercicios Prácticos               | Trabajo | `[Tema]_Caso[I]\_[Apellido].pdf`         | `/Material de estudio/Ejercicios prácticos resueltos/`    |
@@ -45,7 +45,7 @@ Repositorio de Ingeniería y Calidad de Software
 | Clases Grabadas                    | Recurso | `Link_Clases_Grabadas.txt`               | `/Material de estudio/`                                   |
 | Cronograma                         | Recurso | `Cronograma_2025_2doCuatri.txt`          | `/`                                                       |
 | Plan SCM                           | Recurso | `Plan_SCM.md`                            | `/`                                                       |
-| Modalidad Académica                | Recurso | `MA_[AÑO].pdf`                           | `/`                                                       |
+| Modalidad Académica                | Recurso | `MA_[Año].pdf`                           | `/`                                                       |
 
 # Referencia
 | Sigla    | Significado                                           |
@@ -58,7 +58,9 @@ Repositorio de Ingeniería y Calidad de Software
 | Apellido | Apellido del propietario del archivo.                 |
 | Fecha    | Fecha de la clase.                                    |
 | J        | Número de Parcial.                                    |
-| AÑO	     | Año de la modalidad académica.                        |
+| Año	     | Año de la modalidad académica.                        |
+| Entrega  | Tipo de entregable (ej.: PosterCientifico, CharlaTED) |
+| Detalle  | Información extra para identificar el contenido específico del archivo (ej.: Foto, Investigación    |
 
 
 # Criterio línea base
